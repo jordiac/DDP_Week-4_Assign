@@ -12,5 +12,5 @@ Helpful links:
 
     Source Code for the project Github
     Rpres presenation on Rpub
-    Running Shiny app
+    Running Shiny app : <https://jordiac.shinyapps.io/Shiny_App_week4/>
 
