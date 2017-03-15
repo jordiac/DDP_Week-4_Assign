@@ -10,8 +10,8 @@ To run this app localy, clone or fork this repository. Install and load appropri
 
 Helpful links:
 
-    Source Code for the project Github
-    Rpres presenation on Rpub
+    Source Code for the project Github: https://github.com/jordiac/DDP_Week-4_Assign
+    Rpres presenation on Rpub :  http://rpubs.com/jordiac/DDP_week4
     Running Shiny app : https://jordiac.shinyapps.io/Shiny_App_week4/
     
 
