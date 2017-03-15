@@ -1,0 +1,74 @@
+Developping Data Products - Peer Graded Assignment week 4
+========================================================
+author: jordiac
+date: March 14, 2017
+autosize: false
+
+Introduction
+========================================================
+This presentation is part of the Week 4 Peer Graded Assignment from the Developping Data Products course of the Coursera Data Science Specialization (by Johns Hopkins University). This assignment is divided in 2 parts:
+ - First, a shiny App has to be created and deployed in Shiny's servers.
+ - Second, a Reproducible pitch  is meant to be created using Slidify or Rstudio Presenter in order to prsent the main points of the application.
+
+-The **Shiny app** can be found here: <https://jordiac.shinyapps.io/Shiny_App_week4/>
+
+-The **Github** repository: <https://github.com/jordiac/DDP_Week-4_Assign>
+
+
+
+ToothGrowth Data set: Exploratory analysis
+========================================================
+
+-In this **shiny** application we use the **ToothGroowth** data set from R base datasets. 
+-This data set shows the response of the tooth length of 60 Guinea pigs after receiving different dose levels of vitamin C. The vitamin is delivered by 2 methods (OJ: orange juice & VC: Vitamin C). It is conformed by 3 variables: 
+
+   - *len* : The tooth increasing length (in microns)
+   - *supp* : Supplement type (VC or OJ)
+   - *dose* : The dose provided (in mg/day)
+The first rows of the data set look like:    
+```{r, echo=FALSE}
+ToothGrowth[1:3,]
+```
+
+
+Making some plots
+========================================================
+Aiming to visualize what this data set looks like, let's plot some of the variables:
+```{r, echo=FALSE, fig.height= 6, fig.width=18}
+library(ggplot2)
+
+ggplot(data= ToothGrowth, aes(x=dose, y=len, color= as.factor(ToothGrowth$supp) ))+
+        geom_point(size=8)+
+        labs(x="Supplement DOSE (in mg/day)")+
+        theme(axis.title.x = element_text(size=20, hjust=0.5))+
+        theme(axis.text.x = element_text(size=16))+
+        labs(y="Increased tooth Length (in microns")+
+        theme(axis.title.y = element_text(size=20, hjust=0.5))+
+        theme(axis.text.y = element_text(size=16))+
+        labs(color="Supplementory type")+
+        theme(legend.title = element_text(size=18))+
+        theme(legend.text = element_text(size=18))
+```
+Looking at this plot, it seems that *supplementory type* has no influence on *tooth length* so we decided to do not consider it. 
+
+
+
+Prediction model
+========================================================
+
+So finally we used a **linear regression** prediction model in order to **predict** the **tooth length** depending on the **supplement dose**.
+
+```{r, echo=FALSE}
+modFit <- lm(len ~ dose, data= ToothGrowth)
+p_value <- round(summary(modFit)$coef[2,4] , 14)
+
+modFit2 <- lm(len ~ supp, data= ToothGrowth)
+p_value2 <- round(summary(modFit2)$coef[2,4] , 4)
+```
+
+finally we obtain a p-value of **`r p_value` < < 0.05**,  so the *length* is highly dependent on *dose*. therefore we are only going to use the dose variable to predict the tooth length. The *supp* variable has been dismissed because the p-value was **`r p_value2` > 0.05**. 
+
+
+Thank You!
+========================================================
+
